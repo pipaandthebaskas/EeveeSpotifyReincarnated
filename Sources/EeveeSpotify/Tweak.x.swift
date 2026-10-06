@@ -240,6 +240,13 @@ struct EeveeSpotify: Tweak {
         activateArtistHides()
         activatePlaylistHides()
         HideJam.activate()
+        // Experimental: enable native animated artwork before installing the provider hooks.
+        if #available(iOS 26.0, *) {
+            RemoteFlags.shared.force(
+                ["ios-feature-lockscreen.animated_artwork_enabled": true],
+                by: "NativeLockScreenArtwork"
+            )
+        }
         activateRemoteFlags()
         activateRatingPromptBlock()
 
